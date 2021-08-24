@@ -1,7 +1,7 @@
 import React from "react";
 
-const CString = ({ value }) => {
+const CFloat = ({ value }) => {
   return <div>{value}</div>;
 };
 
-export default CString;
+export default CFloat;
