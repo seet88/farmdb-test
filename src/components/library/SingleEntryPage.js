@@ -1,9 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { selectRowById } from "../../store/librariesRecords-slice";
 import { selectLibraryById } from "../../store/templateLibraries-slice";
 import CFloat from "../fieldTypes/CFloat";
 import CString from "../fieldTypes/CString";
+import EntryHeader from "./EntryHeader";
+import classes from "./SingleEntryPage.module.css";
 
 const setComponentByType = (type, value) => {
   switch (type) {
@@ -25,29 +27,27 @@ const setField = (row, column) => {
 };
 
 const SingleEntryPage = ({ match }) => {
-  console.log("match: ", match);
   const { libraryId, entryId } = match.params;
-  console.log("libraryId: ", libraryId);
 
   const { columns } = useSelector((state) =>
     selectLibraryById(state, Number(libraryId))
   );
   const row = useSelector((state) => selectRowById(state, Number(entryId)));
-  console.log("row", row);
-  const value = "frugo";
-  console.log("columns: ", columns);
-
+  const entry = {};
   return (
-    <div>
-      {columns.map((column) => {
-        return (
-          <div key={column.order}>
-            <p>{column.name}</p>
-            {setField(row, column)}
-          </div>
-        );
-      })}
-    </div>
+    <Fragment>
+      <EntryHeader entry={entry} />
+      <ul className={classes.list}>
+        {columns.map((column) => {
+          return (
+            <li key={column.order} className={classes.field}>
+              <p className={classes.columnName}>{column.name}</p>
+              {setField(row, column)}
+            </li>
+          );
+        })}
+      </ul>
+    </Fragment>
   );
 };
 

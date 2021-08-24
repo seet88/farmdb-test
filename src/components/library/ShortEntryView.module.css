@@ -5,9 +5,11 @@
     justify-content: flex-start;
     text-decoration: none;
     color: black;
+    background-color: lightgray;
+    border: 0.1rem solid gray
 }
 .entry:hover{
-    background-color: lightgray;
+    background-color: gray;
 }
 
 .secondLevel{    

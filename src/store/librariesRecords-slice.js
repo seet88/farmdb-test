@@ -58,3 +58,6 @@ export default librariesRecords.reducer;
 
 export const selectRowById = (state, rowId) =>
   state.librariesRecords?.filter((row) => row.rowId === rowId);
+
+export const selectRowsByLibraryId = (state, libId) =>
+  state.librariesRecords?.filter((row) => row.libId === libId);

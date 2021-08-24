@@ -8,6 +8,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Fragment } from "react";
+import LibrariesList from "./components/library/LibrariesList";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           path="/"
           render={() => (
             <Fragment>
-              <EntriesList />
+              <LibrariesList />
             </Fragment>
           )}
         />
