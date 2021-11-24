@@ -1,7 +1,6 @@
-import React from "react";
+import CInt from "./CInt";
 
-const CFloat = ({ value }) => {
-  return <div>{value}</div>;
+const CFloat = ({ field, mode }) => {
+  return <CInt field={field} mode={mode} />;
 };
-
 export default CFloat;

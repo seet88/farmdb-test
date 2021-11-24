@@ -17,3 +17,14 @@
 .columnName{
     color:lightsalmon
 }
+
+.firstRow{
+    display: flex;
+    justify-content: space-between;
+}
+
+.linkEntryName{
+    color: lightseagreen
+}
+
+

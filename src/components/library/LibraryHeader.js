@@ -1,15 +1,10 @@
 import React from "react";
-import classes from "./LibraryHeader.module.css";
-import GoBack from "../buttons/GoBack";
+import Header from "./Header";
 
-const LibraryHeader = ({ library }) => {
+const LibraryHeader = ({ library, mode }) => {
   const { name } = library;
-  return (
-    <header className={classes.header}>
-      <GoBack />
-      {name}
-    </header>
-  );
+
+  return <Header title={name}></Header>;
 };
 
 export default LibraryHeader;

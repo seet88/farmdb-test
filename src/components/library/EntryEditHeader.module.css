@@ -1,0 +1,20 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    background-color: lightgray;
+    position: sticky;
+    top: 0;
+    align-items: center;
+}
+
+.cancel{
+    background-color: indianred;
+    min-width: 3rem;
+    min-height: 3rem;
+}
+
+.save{
+    background-color: lightgreen;
+    min-width: 3rem;
+    min-height: 3rem;
+}

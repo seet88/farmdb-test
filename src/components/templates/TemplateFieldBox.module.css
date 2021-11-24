@@ -1,0 +1,28 @@
+.box{
+    /* background-color: greenyellow; */
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    padding: 5px;
+}
+
+.box:hover{
+    background-color: gray;
+}
+
+.leftSide{
+    display: flex;
+    flex-direction: column;
+}
+
+.description{
+    display: flex;
+    flex-direction: row;
+}
+
+.libName{
+    font-weight: bold;
+}

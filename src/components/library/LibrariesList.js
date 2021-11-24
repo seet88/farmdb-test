@@ -1,30 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import classes from "./LibrariesList.module.css";
 import LibraryTile from "./LibraryTile";
 
-const libraries = [
-  {
-    name: "Pola",
-    id: 1,
-    iconPath: "...",
-    entriesCount: 5,
-    lastModification: "2021-06-07 10:22",
-  },
-  {
-    name: "Uprawy",
-    id: 2,
-    iconPath: "...",
-    entriesCount: 3,
-    lastModification: "2021-05-04 20:36",
-  },
-];
-
 const LibrariesList = () => {
+  const libraries = useSelector((state) => state.librariesTemplate);
+  if (!libraries) return <div>...loading</div>;
   return (
     <ul className={classes.list}>
       {libraries.map((lib) => {
         return (
-          <li key={lib.id}>
+          <li key={lib.libUUID}>
             <LibraryTile library={lib} />
           </li>
         );
