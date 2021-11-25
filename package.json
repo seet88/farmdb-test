@@ -1,6 +1,6 @@
 {
-  "name": "farmdb",
-  "homepage": "https://seet88.github.io/FarmDB-client",
+  "name": "farmdb-test",
+  "homepage": "https://seet88.github.io/farmdb-test",
   "version": "1.0.0",
   "description": "Dynamic databases with various types of fields",
   "private": true,
