@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/farmdb-test/static/css/main.a87f4816.chunk.css",
+    "main.js": "/farmdb-test/static/js/main.575c100c.chunk.js",
+    "main.js.map": "/farmdb-test/static/js/main.575c100c.chunk.js.map",
+    "runtime-main.js": "/farmdb-test/static/js/runtime-main.4897e6f8.js",
+    "runtime-main.js.map": "/farmdb-test/static/js/runtime-main.4897e6f8.js.map",
+    "static/css/2.d565e0ea.chunk.css": "/farmdb-test/static/css/2.d565e0ea.chunk.css",
+    "static/js/2.11a458d8.chunk.js": "/farmdb-test/static/js/2.11a458d8.chunk.js",
+    "static/js/2.11a458d8.chunk.js.map": "/farmdb-test/static/js/2.11a458d8.chunk.js.map",
+    "static/js/3.55db9e8d.chunk.js": "/farmdb-test/static/js/3.55db9e8d.chunk.js",
+    "static/js/3.55db9e8d.chunk.js.map": "/farmdb-test/static/js/3.55db9e8d.chunk.js.map",
+    "index.html": "/farmdb-test/index.html",
+    "static/css/2.d565e0ea.chunk.css.map": "/farmdb-test/static/css/2.d565e0ea.chunk.css.map",
+    "static/css/main.a87f4816.chunk.css.map": "/farmdb-test/static/css/main.a87f4816.chunk.css.map",
+    "static/js/2.11a458d8.chunk.js.LICENSE.txt": "/farmdb-test/static/js/2.11a458d8.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4897e6f8.js",
+    "static/css/2.d565e0ea.chunk.css",
+    "static/js/2.11a458d8.chunk.js",
+    "static/css/main.a87f4816.chunk.css",
+    "static/js/main.575c100c.chunk.js"
+  ]
+}
