@@ -15,7 +15,6 @@ const CCheckbox = ({ field, mode }) => {
     dispatch(updateFieldValue(data));
   };
 
-  console.log("values", field?.value);
   const isDisabled = mode === "view" ? true : false;
   const isChecked = field?.value === "1" ? true : false;
   return (
@@ -24,6 +23,7 @@ const CCheckbox = ({ field, mode }) => {
       control={
         <Checkbox
           id={field.columnUUID}
+          data-testid={field.columnName.replaceAll(" ", "_").toLowerCase()}
           name={field.columnName}
           checked={isChecked}
           onChange={saveDataHandler}

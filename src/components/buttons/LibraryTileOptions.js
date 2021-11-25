@@ -1,17 +1,16 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  MenuItem,
-} from "@mui/material";
+import { MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteLibraryData } from "../../store/librariesData-slice";
 import { deleteLibraryTemplate } from "../../store/templateLibraries-slice";
+import DialogQuestion from "../../UI/DialogQuestion";
+
+const DIALOG_QUESTION = {
+  title: "Are you sure?",
+  contentText: ` Do you want delete this library template with data? This can't be
+  undone.`,
+};
 
 const LibraryTileOptions = ({ libUUID, closeMenu }) => {
   const history = useHistory();
@@ -46,29 +45,22 @@ const LibraryTileOptions = ({ libUUID, closeMenu }) => {
 
   return (
     <>
-      <MenuItem onClick={editHandler}>Edit template</MenuItem>
-      <MenuItem onClick={openDeleteAlertHandler}>Delete lib</MenuItem>
-      <MenuItem onClick={closeMenu}>Option 3</MenuItem>
-      <Dialog
-        open={isDeleteAlertOpen}
-        onClose={closeDeleteAlertHandler}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+      <MenuItem onClick={editHandler} data-testid="libraryMenuEditTemplate">
+        Edit template
+      </MenuItem>
+      <MenuItem
+        onClick={openDeleteAlertHandler}
+        data-testid="libraryMenuDelete"
       >
-        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Do you want delete this library template with data? This can't be
-            undone.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={closeDeleteAlertHandler}>Disagree</Button>
-          <Button onClick={deleteLibraryHandler} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
+        Delete lib
+      </MenuItem>
+      <DialogQuestion
+        isAlertOpen={isDeleteAlertOpen}
+        disagreeHandler={closeDeleteAlertHandler}
+        agreeHandler={deleteLibraryHandler}
+        title={DIALOG_QUESTION.title}
+        contentText={DIALOG_QUESTION.contentText}
+      />
     </>
   );
 };

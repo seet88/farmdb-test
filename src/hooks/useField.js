@@ -4,11 +4,6 @@ import { getRowsDataByIds } from "../store/librariesData-slice";
 import { selectLibraryById } from "../store/templateLibraries-slice";
 
 const useField = (searchedFieldName) => {
-  console.log("aaa");
-  // const fields = useSelector((state) => selectAllFields(state));
-  // const field = fields.find(
-  //   (field) => field.name.toLowerCase() === searchedFieldName.toLowerCase()
-  //   );
   const field = useSelector((state) =>
     selectFieldByName(state, searchedFieldName)
   );
@@ -24,7 +19,6 @@ export const useLinkToEntryField = (searchedFieldName) => {
 
   let link_libUUID;
   if (field?.field?.entryLinks && field?.field?.entryLinks?.length > 0) {
-    console.log("field?.field?.entryLinks", field?.field?.entryLinks);
     link_libUUID = field?.field?.entryLinks[0]?.libUUID;
   }
   const listRowsUUID = [];
@@ -50,8 +44,6 @@ export const useLinkToEntryField = (searchedFieldName) => {
     const sqlFieldName = templateColumns.columns.find(
       (column) => column.name.toLowerCase() === fieldName.toLowerCase()
     )?.sqlFieldName;
-    // console.log("sqlFieldName in fieldLink Entry:", sqlFieldName, fieldName);
-    // console.log("templateColumns.columns:", templateColumns.columns);
     return this[sqlFieldName];
   }
 
@@ -74,9 +66,6 @@ export const useScriptField = (script, fieldType) => {
     error: null,
   };
   if (fieldType !== "script") return ScriptResult;
-  // console.log("columnTemplate.name", columnTemplate.name);
-  //   if (mode === "view") return <div>{field?.value}</div>;
-  //   return null;
   // eslint-disable-next-line
   const useLinkToEntryField_t = (searchedFieldName) => {
     return useLinkToEntryField(searchedFieldName);
@@ -84,7 +73,6 @@ export const useScriptField = (script, fieldType) => {
   let scriptJSON = script;
 
   const scriptObject = JSON.parse(scriptJSON);
-  console.log("scriptObject.expr", scriptObject.expr);
   let scriptCode = scriptObject.expr;
   scriptCode = scriptCode.replaceAll("].field(", "]?.fieldLink(");
   scriptCode = scriptCode.replaceAll("field(", " useLinkToEntryField_t(");
@@ -103,10 +91,7 @@ export const useScriptField = (script, fieldType) => {
           lastLine = false;
         }
       });
-    console.log("code", code);
-    console.log("code joined", code.reverse().join("\n"));
     scriptCode = code.reverse().join("\n");
-    // scriptCode = replaceLast("\n", "\n return ", scriptCode);
   }
   console.log("before eval", scriptCode);
 

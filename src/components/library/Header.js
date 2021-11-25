@@ -25,7 +25,8 @@ const Header = (props) => {
                 size="large"
                 edge="start"
                 color="inherit"
-                aria-label="menu"
+                aria-label="go-back"
+                data-testid="go-back"
                 sx={{ mr: 2 }}
                 onClick={handleGoBackClick}
               >
@@ -40,6 +41,7 @@ const Header = (props) => {
                 edge="end"
                 color="inherit"
                 aria-label="home"
+                data-testid="home"
                 sx={{ mr: 2 }}
                 onClick={handlerHomeClick}
               >

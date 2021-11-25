@@ -15,7 +15,6 @@ const TemplateFields = ({ saveFieldsConfigHandler, fields }) => {
   }, [fieldsConfig]);
 
   const addFieldConfig = (fieldConfig) => {
-    console.log("fieldConfig in TemplateFieldCreator", fieldConfig);
     if (!fieldConfig?.columnUUID) fieldConfig.columnUUID = uuidv4();
 
     setFieldsConfig((prev) => [...prev, fieldConfig]);
@@ -41,7 +40,6 @@ const TemplateFields = ({ saveFieldsConfigHandler, fields }) => {
     setMode("view");
   };
 
-  console.log("LIST fieldsConfig", fieldsConfig);
   return (
     <div className={classes.fields}>
       template fields

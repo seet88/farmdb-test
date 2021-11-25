@@ -5,7 +5,11 @@ import { Box } from "@mui/system";
 
 const ShortEntryView = ({ entry, mode, libUUID }) => {
   const content = (
-    <ListItemButton>
+    <ListItemButton
+      data-testid={
+        "linkToEntry-" + entry.fe_title.replaceAll(" ", "_").toLowerCase()
+      }
+    >
       <ListItemText primary={entry.fe_title} secondary={entry.fe_description} />
     </ListItemButton>
   );

@@ -68,7 +68,6 @@ const setComponentByType = (column, field, mode, options) => {
         ></CDropDownList>
       );
     case "libEntry":
-      // console.log("insetComponentByType - column: ", column);
       return (
         <LinkToEntry
           mode={mode}
@@ -99,7 +98,6 @@ const SingleEntryPage = () => {
     selectConfiguration(state)
   )?.storageType;
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  // const librariesData = useSelector((state) => selectAllDataLibrary(state));
   const [updateEntryInPG] = useMutation(UPDATE_LIBRARY_ROWS_PG);
   const [addEntryInPG] = useMutation(ADD_LIBRARY_ROWS_PG);
 
@@ -137,7 +135,6 @@ const SingleEntryPage = () => {
     };
   });
   useEffect(() => {
-    // console.log("before updateEntryValues in Init");
     dispatch(updateEntryValues(fieldsInit));
     return () => {
       console.log("clear state after dismount component");
@@ -147,24 +144,18 @@ const SingleEntryPage = () => {
   }, []);
 
   useEffect(() => {
-    // if (mode === "edit") {
-    // console.log("before updateEntryValues");
-
     localStorage.setItem(
       "entryViewConfig",
       JSON.stringify({ rowUUID, libUUID, mode })
     );
     dispatch(updateEntryValues(fieldsInit));
-    // }
     // eslint-disable-next-line
   }, [rowUUID, libUUID, columnsTemplates]);
 
   const cancelHandler = () => {
-    // console.log("fieldsInit", fieldsInit);
     dispatch(updateEntryValues(fieldsInit));
   };
   const saveHandler = () => {
-    console.log("clicked save button");
     const savedRowUUID = mode === "addNewEntry" ? uuidv4() : rowUUID;
     const editedEntry = {
       editedFields: fields,
@@ -173,18 +164,15 @@ const SingleEntryPage = () => {
     };
 
     if (mode === "addNewEntry") {
-      console.log("addNewEntryToDB");
       sendInsertedDataToDatabase(fields, savedRowUUID);
       dispatch(addNewLibraryRecord(editedEntry));
     } else {
-      console.log("updateEntryInDB");
       sendUpdatedDataToDatabase(fields);
       dispatch(updateLibraryRecord(editedEntry));
     }
   };
 
   const prepareDataForSendToPG = (updatedEntry, savedRowUUID) => {
-    console.log("updated/inserted Entry: ", savedRowUUID, updatedEntry);
     const getValue = (field) => {
       if (!field?.hasOwnProperty("value")) return null;
       if (field?.value?.hasOwnProperty("value")) return field?.value?.value;
@@ -211,7 +199,6 @@ const SingleEntryPage = () => {
         entryLinks,
       };
     });
-    // console.log("columns in mutation", columns);
     const rows = [
       {
         rowUUID: savedRowUUID ? savedRowUUID : rowUUID,
@@ -227,7 +214,6 @@ const SingleEntryPage = () => {
   const sendInsertedDataToDatabase = (updatedEntry, savedRowUUID) => {
     try {
       const libData = prepareDataForSendToPG(updatedEntry, savedRowUUID);
-      console.log("libData if Mutation addEntryInPG", libData);
       if (storageType === "outerDatabase")
         addEntryInPG({ variables: { libraryData: libData } });
     } catch (error) {
@@ -238,7 +224,6 @@ const SingleEntryPage = () => {
   const sendUpdatedDataToDatabase = (insertedEntry) => {
     try {
       const libData = prepareDataForSendToPG(insertedEntry);
-      console.log("libData if Mutation update", libData);
 
       if (storageType === "outerDatabase")
         updateEntryInPG({ variables: { libraryData: libData } });
@@ -247,18 +232,13 @@ const SingleEntryPage = () => {
     }
   };
 
-  console.log("before selectAllFields");
   const fields = useSelector((state) => selectAllFields(state));
-
-  console.log("fields", fields);
-  console.log("mode", mode);
 
   const snackbarCloseHandle = (event, reason) => {
     if (reason === "clickaway") return;
     setIsSnackbarOpen(false);
   };
 
-  // useEffect(() => {}, [fields]);
   const isEditMode = mode === "edit" || mode === "addNewEntry" ? true : false;
   return (
     <Fragment>

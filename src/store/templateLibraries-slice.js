@@ -11,14 +11,11 @@ export const librariesTemplateSlice = createSlice({
     },
     addNewLibraryTemplate(state, action) {
       const libUUID = action.payload.libUUID;
-      console.log("libUUID in addNewLibraryTemplate", libUUID);
 
       let templateLibIdx = state.findIndex((lib) => lib.libUUID === libUUID);
       if (templateLibIdx >= 0) {
-        console.log("found templateLib", action.payload);
         state[templateLibIdx] = action.payload;
       } else {
-        console.log("not found template lib");
         state.push(action.payload);
       }
     },

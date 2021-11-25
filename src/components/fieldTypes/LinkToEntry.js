@@ -20,8 +20,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Box } from "@mui/system";
 
 const LinkToEntry = ({ field, mode, columnTemplate }) => {
-  // const { libUUID, uniqueName } = entryLinks;
-  // console.log("columnTemplate in LinkToEntry", columnTemplate);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [isLinkListOpen, setIsLinkListOpen] = useState(true);
@@ -34,7 +32,6 @@ const LinkToEntry = ({ field, mode, columnTemplate }) => {
   };
 
   const deleteHandler = (e, entryIndex) => {
-    console.log("delete link handler", entryIndex);
     e.preventDefault();
     dispatch(deleteEntryLink({ columnUUID: field?.columnUUID, entryIndex }));
   };
@@ -80,6 +77,10 @@ const LinkToEntry = ({ field, mode, columnTemplate }) => {
                       <IconButton
                         edge="end"
                         aria-label="delete"
+                        data-testid={
+                          "deleteLinkToEntry-" +
+                          entryLink?.rowTitle.replaceAll(" ", "_").toLowerCase()
+                        }
                         onClick={(event) => deleteHandler(event, idx)}
                       >
                         <DeleteIcon />
@@ -87,14 +88,24 @@ const LinkToEntry = ({ field, mode, columnTemplate }) => {
                     )
                   }
                 >
-                  <ListItemText primary={entryLink?.rowTitle} />
+                  <ListItemText
+                    primary={entryLink?.rowTitle}
+                    data-testid={
+                      "linkToEntry-" +
+                      entryLink?.rowTitle.replaceAll(" ", "_").toLowerCase()
+                    }
+                  />
                 </ListItem>
               </Link>
               <Divider variant="inset" component="li" />
             </Box>
           ))}
           {isEditMode && (
-            <ListItemButton sx={{ pl: 6 }} onClick={toggleShowModalHandler}>
+            <ListItemButton
+              sx={{ pl: 6 }}
+              onClick={toggleShowModalHandler}
+              data-testid={field.columnName.replaceAll(" ", "_").toLowerCase()}
+            >
               <ListItemIcon>
                 <AddIcon />
               </ListItemIcon>
@@ -118,53 +129,6 @@ const LinkToEntry = ({ field, mode, columnTemplate }) => {
         </Box>
       </Modal>
     </>
-    // <div>
-    //   <ul className={classes.list}>
-    //     {field.entryLinks?.map((entryLink, idx) => (
-    //       <li className={classes.item} key={idx}>
-    //         {/* <Link to={`/library/${entry?.libraryId}/entry/${entry?.id}`}> */}
-    //         <Link
-    //           to={{
-    //             pathname: "/library/entry",
-    //             state: {
-    //               libUUID: entryLink?.libUUID,
-    //               rowUUID: entryLink?.rowUUID,
-    //               mode: "view",
-    //             },
-    //           }}
-    //           // className={classes.link}
-    //         >
-    //           <div className={classes.link}>
-    //             <div className={classes.name}>{entryLink?.rowTitle}</div>
-    //             {(mode === "edit" || mode === "addNewEntry") && (
-    //               <button
-    //                 className={classes.delete}
-    //                 onClick={(event) => deleteHandler(event, idx)}
-    //               >
-    //                 X
-    //               </button>
-    //             )}
-    //           </div>
-    //         </Link>
-    //       </li>
-    //     ))}
-    //   </ul>
-    //   {(mode === "edit" || mode === "addNewEntry") && (
-    //     <button
-    //       className={classes.viewEntryList}
-    //       onClick={toggleShowModalHandler}
-    //     >
-    //       Add from list
-    //     </button>
-    //   )}
-    //   {showModal && (
-    //     <ModalEntriesList
-    //       toggleShowModal={toggleShowModalHandler}
-    //       libUUID={libUUID}
-    //       columnUUID={field?.columnUUID}
-    //     ></ModalEntriesList>
-    //   )}
-    // </div>
   );
 };
 

@@ -30,8 +30,6 @@ const SelectField = ({ setOptions, options }) => {
     setPoints(newPointsList);
   };
 
-  console.log("points", points, "options", options);
-
   return (
     <Fragment>
       <div>

@@ -17,8 +17,6 @@ const style = {
 };
 
 const ModalEntriesList = ({ toggleShowModal, libUUID, columnUUID }) => {
-  console.log("modal:", libUUID, "columnUUID", columnUUID);
-
   return (
     <Box sx={style}>
       <EntriesList

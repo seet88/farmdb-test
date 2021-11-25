@@ -24,9 +24,13 @@ import TemplateLibraryCreator from "./components/templates/TemplateLibraryCreato
 import MainTopHeader from "./UI/MainTopHeader";
 import Configuration from "./components/configuration/Configuration";
 import { updateConfiguration } from "./store/configuration-slice";
+import {
+  LOCAL_STORAGE_INIT_CONFIG,
+  LOCAL_STORAGE_INIT_DATA,
+  LOCAL_STORAGE_INIT_TEMPLATES,
+} from "./API/config";
 
 function App() {
-  console.log("main function APP");
   const {
     loading: loadingDataPg,
     error: errorDataPg,
@@ -34,15 +38,25 @@ function App() {
   } = useQuery(GET_LIBRARIES_DATA_PG);
   const { loading, error, data } = useQuery(GET_LIBRARIES_TEMPLATES);
   const dispatch = useDispatch();
-  // const { storageType } = useSelector((state) => selectConfiguration(state));
 
   useEffect(() => {
-    console.log("read data from localStorage");
     const configJson = localStorage.getItem("config");
-    dispatch(updateConfiguration(JSON.parse(configJson)));
-    const templatesJson = localStorage.getItem("templates");
+    let config = JSON.parse(configJson);
+    const isFirstStart = config?.isFirstStart || config === null;
+    if (isFirstStart) {
+      config = JSON.parse(LOCAL_STORAGE_INIT_CONFIG);
+      config = {
+        ...config,
+        isFirstStart: false,
+      };
+      localStorage.setItem("config", JSON.stringify(config));
+    }
+    dispatch(updateConfiguration(config));
+    let templatesJson = localStorage.getItem("templates");
+    if (isFirstStart) templatesJson = LOCAL_STORAGE_INIT_TEMPLATES;
     dispatch(updateAllLibraries(JSON.parse(templatesJson)));
-    const dataJson = localStorage.getItem("libsData");
+    let dataJson = localStorage.getItem("libsData");
+    if (isFirstStart) dataJson = LOCAL_STORAGE_INIT_DATA;
     dispatch(updateAllLibrariesDataFromStorage(JSON.parse(dataJson)));
     // eslint-disable-next-line
   }, []);
@@ -56,9 +70,7 @@ function App() {
     if (errorDataPg)
       console.error("error In GET_LIBRARIES_DATA_PG", errorDataPg);
     else if (!loadingDataPg)
-      // dispatch(updateAllLibrariesRecords(dataData?.librariesData));
       dispatch(updateAllLibrariesData(dataPg?.librariesDataPG));
-    // console.log(dataPg);
   }, [loadingDataPg, dataPg, dispatch, errorDataPg]);
 
   return (

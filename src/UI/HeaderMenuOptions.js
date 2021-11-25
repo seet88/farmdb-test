@@ -1,7 +1,5 @@
 import { MenuItem } from "@mui/material";
-// import { useState } from "react";
 import { useHistory } from "react-router";
-// import classes from "./HeaderMenuOptions.module.css";
 
 const HeaderMenuOptions = ({ handleCloseMenu }) => {
   const history = useHistory();

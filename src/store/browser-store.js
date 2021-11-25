@@ -4,7 +4,6 @@ import { selectAllDataLibrary } from "./librariesData-slice";
 import { selectAllLibraries } from "./templateLibraries-slice";
 
 const BrowserStore = () => {
-  console.log("BrowserStore");
   const librariesData = useSelector((state) => selectAllDataLibrary(state));
   if (librariesData.length)
     localStorage.setItem("libsData", JSON.stringify(librariesData));

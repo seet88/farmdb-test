@@ -1,6 +1,5 @@
 import React from "react";
 import ShortEntryView from "./ShortEntryView";
-// import classes from "./EntriesList.module.css";
 import { useSelector } from "react-redux";
 import { selectLibraryById } from "../../store/templateLibraries-slice";
 import { addNewEntryLink } from "../../store/editedEntry-slice";
@@ -27,81 +26,17 @@ const EntriesList = ({
   parentColumnUUID,
   clickEntryLinkHandler,
 }) => {
-  const lacation = useLocation();
-  if (mode !== "linking") libUUID = lacation?.state?.libUUID;
-  console.log("libUUID", libUUID);
+  const location = useLocation();
+  if (mode !== "linking") libUUID = location?.state?.libUUID;
   const dispatch = useDispatch();
-  // return <div>{state}</div>;
-  /*
-  const getColumnsValueByColumnName = (columns, descriptionColumn) => {
-    let descriptionValue;
-
-    columns.forEach((column) => {
-      if (
-        String(column.columnName).toUpperCase() ===
-        String(descriptionColumn?.name).toUpperCase()
-      )
-        if (descriptionColumn.type === "libEntry") {
-          descriptionValue = column?.entryLinks
-            ?.map((link) => link.uniqueName)
-            ?.join(", ");
-        } else descriptionValue = column.value;
-    });
-
-    return { descriptionValue };
-  };
-
-  const calcEntries = (rows, descriptionColumn) => {
-    const entries = [];
-
-    rows.forEach((row) => {
-      const { descriptionValue } = getColumnsValueByColumnName(
-        row.columns,
-        descriptionColumn
-      );
-
-      entries.push({
-        title: row.uniqueName,
-        description: descriptionValue,
-        rowUUID: row.rowUUID,
-        libUUID,
-      });
-    });
-
-    return entries;
-  };
-*/
   const libData = useSelector((state) => getLibDataByLibraryId(state, libUUID));
   const library = {
     name: libData?.name,
   };
-  /*
-  const { columns } = useSelector((state) => selectLibraryById(state, libUUID));
-
-  // const titleColumn = columns.find((column) => column.usage === "title")?.name;
-  const descriptionColumn = columns.find(
-    (column) => column.usage === "description"
-  );
-
-  const libraryTemplate = useSelector((state) =>
-    state.librariesTemplate?.find((lib) => lib.libUUID === libUUID)
-  );
-  const library = {
-    name: libraryTemplate?.name,
-  };
-  */
-  /*
-  let entriesList = calcEntries(rows, descriptionColumn);
-
-  useEffect(() => {
-    entriesList = calcEntries(rows, descriptionColumn);
-  }, [rows, descriptionColumn]);
-*/
 
   const libTemplate = useSelector((state) => selectLibraryById(state, libUUID));
   const clickBoxHandler = (entry) => {
     if (mode === "linking") {
-      console.log("entry", entry);
       const columnParentName = libTemplate.columns.find(
         (col) => col.columnUUID === parentColumnUUID
       )?.sqlFieldName;
@@ -120,7 +55,6 @@ const EntriesList = ({
   const CustomBox = ({ entry, children, clickHandler }) => {
     return <div onClick={() => clickHandler(entry)}>{children}</div>;
   };
-  console.log("libData", libData);
 
   return (
     <>
@@ -151,6 +85,7 @@ const EntriesList = ({
             component="div"
             id="nested-list-subheader"
             sx={{ backgroundColor: "primary.light" }}
+            data-testid={"entriesList"}
           >
             Entries List Items:
           </ListSubheader>

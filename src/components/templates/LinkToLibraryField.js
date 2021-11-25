@@ -12,12 +12,6 @@ const LinkToLibraryField = ({ setOptions, options: defaultOptions }) => {
       (lib) => lib?.libUUID === defaultOptions[0]?.dictionaryLibraryUUID
     )?.sqlTableName;
   };
-  console.log(
-    "getOptionValue",
-    librariesInfo.find(
-      (lib) => lib?.libUUID === defaultOptions?.dictionaryLibraryUUID
-    )
-  );
   const [chosenLibrary, setChosenLibrary] = useState(getOptionValue());
 
   const applyOptions = (index) => {
@@ -36,9 +30,7 @@ const LinkToLibraryField = ({ setOptions, options: defaultOptions }) => {
     // eslint-disable-next-line
   }, [librariesInfo]);
 
-  console.log("librariesInfo", librariesInfo);
   const chooseLibHandler = (e) => {
-    console.log("LinkToLibraryField in chooseLibHandler", e);
     const idx = e.target.selectedIndex;
     applyOptions(idx);
     setChosenLibrary(e.target.value);

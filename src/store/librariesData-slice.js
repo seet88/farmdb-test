@@ -32,7 +32,6 @@ export const librariesDataSlice = createSlice({
 
         state.push(libTemp);
       });
-      // action.payload.map((lib) => state.push(lib));
     },
     addNewLibraryData(state, action) {
       const { libUUID, name } = action.payload;
@@ -46,22 +45,14 @@ export const librariesDataSlice = createSlice({
     },
     updateLibraryRecord(state, action) {
       const { libUUID, rowUUID, editedFields } = action.payload;
-      console.log("editedFields", editedFields);
       const libIndex = state.findIndex((lib) => lib.libUUID === libUUID);
-      console.log("libIndex", libIndex);
       const rowIndex = state[libIndex].rows.findIndex(
         (row) => row.rowUUID === rowUUID
       );
-      console.log("updateStart:", rowIndex);
       editedFields.forEach((col) => {
         const sqlFieldName = col.columnTemplate.sqlFieldName;
         if (sqlFieldName) {
           if (col.columnTemplate.type === "libEntry") {
-            // console.log(
-            //   "state[libIndex].rows[rowIndex][sqlFieldName]",
-            //   state[libIndex].rows[rowIndex][sqlFieldName],
-            //   sqlFieldName
-            // );
             state[libIndex].rows[rowIndex][sqlFieldName].value =
               col.field?.value?.value;
             state[libIndex].rows[rowIndex][sqlFieldName].entrylinks =
@@ -69,11 +60,9 @@ export const librariesDataSlice = createSlice({
           } else state[libIndex].rows[rowIndex][sqlFieldName] = col.field.value;
         }
       });
-      console.log("UpdateEnds:", state[libIndex].rows[rowIndex]);
     },
     addNewLibraryRecord(state, action) {
       const { libUUID, rowUUID, editedFields, name } = action.payload;
-      console.log("editedFields", editedFields);
       let libIndex = state.findIndex((lib) => lib.libUUID === libUUID);
       if (libIndex < 0) {
         state.push({
@@ -82,10 +71,8 @@ export const librariesDataSlice = createSlice({
           rows: [],
         });
         libIndex = state.findIndex((lib) => lib.libUUID === libUUID);
-        console.log("No library found while adding new record");
       }
 
-      console.log("libIndex", libIndex);
       const newRow = {};
       const titleColumnsValues = [];
       const descriptionColumnsValues = [];
@@ -129,10 +116,8 @@ export const librariesDataSlice = createSlice({
 
     deleteRowData(state, action) {
       const { libUUID, rowUUID } = action.payload;
-      console.log("libUUID, rowUUID ", libUUID, rowUUID);
       let libIndex = state.findIndex((lib) => lib.libUUID === libUUID);
       if (libIndex > -1) {
-        console.log("libIndex ", libIndex);
         let rowIndex = state[libIndex].rows.findIndex(
           (row) => row.rowUUID === rowUUID
         );

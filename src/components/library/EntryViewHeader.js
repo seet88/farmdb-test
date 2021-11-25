@@ -1,22 +1,17 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  IconButton,
-} from "@mui/material";
+import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-// import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Header from "./Header";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteRowData } from "../../store/librariesData-slice";
 import { useHistory } from "react-router";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import GoBack from "../buttons/GoBack";
-// import classes from "./EntryViewHeader.module.css";
+import DialogQuestion from "../../UI/DialogQuestion";
+
+const DIALOG_QUESTION = {
+  title: "Are you sure?",
+  contentText: `Do you want delete this row data? This cannot be undone!`,
+};
 
 const EntryViewHeader = ({ entry, setMode }) => {
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
@@ -51,6 +46,7 @@ const EntryViewHeader = ({ entry, setMode }) => {
         edge="end"
         color="inherit"
         aria-label="edit"
+        data-testid="edit"
         sx={{ mr: 1 }}
         onClick={editHandler}
       >
@@ -61,32 +57,21 @@ const EntryViewHeader = ({ entry, setMode }) => {
         size="large"
         edge="end"
         color="inherit"
-        aria-label="menu"
+        aria-label="delete"
+        data-testid="delete"
         sx={{ mr: 1 }}
         onClick={openDeleteRowAlertHandler}
       >
         <DeleteIcon />
       </IconButton>
 
-      <Dialog
-        open={isDeleteAlertOpen}
-        onClose={closeDeleteAlertHandler}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Do you want delete this row data? This can't be undone.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={closeDeleteAlertHandler}>Disagree</Button>
-          <Button onClick={deleteRowHandler} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <DialogQuestion
+        isAlertOpen={isDeleteAlertOpen}
+        disagreeHandler={closeDeleteAlertHandler}
+        agreeHandler={deleteRowHandler}
+        title={DIALOG_QUESTION.title}
+        contentText={DIALOG_QUESTION.contentText}
+      />
     </Header>
   );
 };

@@ -71,7 +71,6 @@ const TemplateFieldCreator = ({
   };
 
   const saveScriptCodeHandler = (e) => {
-    console.log("scriptValue", e.target.value);
     const options = [];
     const jsonString = fieldConfig?.options[0]?.script;
     const script = JSON.parse(jsonString);
@@ -81,9 +80,6 @@ const TemplateFieldCreator = ({
   };
 
   const setInputValueHandler = (e) => {
-    console.log("e", e);
-    console.log("fieldValue", e.target.value);
-    console.log("target", e.target);
     setFieldConfig((prevFieldConfig) => {
       return {
         ...prevFieldConfig,
@@ -91,8 +87,6 @@ const TemplateFieldCreator = ({
       };
     });
   };
-  console.log("fieldType", fieldType);
-  console.log("fieldConfig", fieldConfig);
 
   const submitHandle = (e) => {
     e.preventDefault();
@@ -119,7 +113,6 @@ const TemplateFieldCreator = ({
         <input
           type="text"
           id="description"
-          // value={fieldConfig?.fieldName}
           onBlur={setInputValueHandler}
           defaultValue={fieldConfig["description"]}
         />
@@ -141,7 +134,6 @@ const TemplateFieldCreator = ({
           <input
             type="checkbox"
             id="defaultValue"
-            // value={fieldConfig?.fieldName}
             onChange={setInputValueHandler}
             defaultChecked={fieldConfig["defaultValue"]}
           />
@@ -154,7 +146,6 @@ const TemplateFieldCreator = ({
         <input
           type="text"
           id="defaultValue"
-          // value={fieldConfig?.fieldName}
           onBlur={setInputValueHandler}
           defaultValue={fieldConfig["defaultValue"]}
         />
@@ -202,7 +193,6 @@ const TemplateFieldCreator = ({
               <input
                 type="text"
                 id="name"
-                // value={fieldConfig?.fieldName}
                 onBlur={setInputValueHandler}
                 defaultValue={fieldConfig["name"]}
               />
@@ -210,7 +200,6 @@ const TemplateFieldCreator = ({
               <input
                 type="text"
                 id="sqlFieldType"
-                // value={fieldConfig?.fieldName}
                 onBlur={setInputValueHandler}
                 defaultValue={fieldConfig["sqlFieldType"]}
               />
@@ -254,8 +243,6 @@ const TemplateFieldCreator = ({
                   );
                 })}
               </select>
-
-              {/* <input type="button" value="add" onClick={submitHandle} /> */}
             </form>
           )}
         </div>

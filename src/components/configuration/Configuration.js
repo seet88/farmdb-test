@@ -15,17 +15,21 @@ import {
   selectConfiguration,
 } from "../../store/configuration-slice";
 import Header from "../library/Header";
+import ClearLocalStorage from "./ClearLocalStorage";
 
 const Configuration = () => {
   const dispatch = useDispatch();
   const config = useSelector((state) => selectConfiguration(state));
   const [storageType, setStorageType] = useState(config?.storageType);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+
   const storageTypeHandler = (e) => {
     setStorageType(e.target.value);
   };
+
   const saveConfigHandler = (event) => {
     const configForSave = {
+      ...config,
       storageType,
     };
     dispatch(updateConfiguration(configForSave));
@@ -57,7 +61,11 @@ const Configuration = () => {
               <MenuItem value="outerDatabase">Outer database</MenuItem>
             </Select>
           </FormControl>
-          <Button type="submit" variant="contained">
+
+          <FormControl sx={{ ml: 3 }}>
+            <ClearLocalStorage />
+          </FormControl>
+          <Button type="submit" variant="contained" sx={{ mt: 3 }}>
             Save
           </Button>
           <Snackbar

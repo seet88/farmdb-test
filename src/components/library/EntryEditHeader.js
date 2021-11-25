@@ -20,6 +20,7 @@ const EntryEditHeader = ({ setMode, actionButtonHandler }) => {
   return (
     <Header mode="empty">
       <IconButton
+        data-testid="saveEntry"
         size="large"
         edge="start"
         color="inherit"
@@ -33,6 +34,7 @@ const EntryEditHeader = ({ setMode, actionButtonHandler }) => {
         Edit
       </Typography>
       <IconButton
+        data-testid="cancelEntry"
         size="large"
         edge="end"
         color="inherit"
@@ -43,15 +45,6 @@ const EntryEditHeader = ({ setMode, actionButtonHandler }) => {
         <ClearIcon />
       </IconButton>
     </Header>
-    // <div className={classes.header}>
-    //   <button onClick={saveButtonHandler} className={classes.save}>
-    //     &#10003;
-    //   </button>
-    //   <div>Edit entry</div>
-    //   <button onClick={cancelButtonHandler} className={classes.cancel}>
-    //     Cancel
-    //   </button>
-    // </div>
   );
 };
 

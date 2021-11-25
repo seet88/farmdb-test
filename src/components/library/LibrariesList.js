@@ -10,7 +10,10 @@ const LibrariesList = () => {
     <ul className={classes.list}>
       {libraries.map((lib) => {
         return (
-          <li key={lib.libUUID}>
+          <li
+            key={lib.libUUID}
+            data-testid={"lib-" + lib.name.replaceAll(" ", "_").toLowerCase()}
+          >
             <LibraryTile library={lib} />
           </li>
         );

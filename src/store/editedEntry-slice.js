@@ -16,10 +16,6 @@ export const editedEntrySlice = createSlice({
         (field) => field.field.columnUUID === columnUUID
       );
       let value = valueIn;
-      // if (type === "date" || type === "datetime-local")
-      //   // value = Date.parse(value);
-      //   value = value;
-      // else
       if (type === "checkbox") value = checked ? "1" : "0";
       if (fieldIndex >= 0) {
         state.items[fieldIndex].field.value = String(value);
@@ -60,7 +56,6 @@ export const editedEntrySlice = createSlice({
           console.log("newUUID", newUUID);
           const entryLinks = [];
           entryLinks.push(link);
-          // if (!state.items[fieldIndex]?.field?.value?.value)
           state.items[fieldIndex].field.value.value = newUUID;
           state.items[fieldIndex].field.entryLinks = entryLinks;
         }

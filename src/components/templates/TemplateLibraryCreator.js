@@ -60,8 +60,6 @@ const TemplateLibraryCreator = () => {
       return { ...prev, libUUID: uuidv4() };
     });
 
-  console.log("libConfig", libConfig);
-
   const setInputValueHandler = (e) => {
     setLibConfig((prev) => {
       return { ...prev, [e.target.id]: e.target.value };
@@ -70,7 +68,6 @@ const TemplateLibraryCreator = () => {
 
   const saveLibraryHandler = () => {
     try {
-      console.log("saveLibraryHandler");
       const libConfigTmp = { ...libConfig };
       libConfigTmp.sqlTableName = prepareSqlFieldName(libConfigTmp.name);
       dispatch(addNewLibraryTemplate(libConfigTmp));

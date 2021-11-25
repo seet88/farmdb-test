@@ -63,6 +63,7 @@ const LibraryTile = ({ library }) => {
               aria-haspopup="true"
               aria-expanded={isMenuOpened ? "true" : undefined}
               onClick={handleOpenMenu}
+              data-testid={`libraryMenu-${library?.name.toLowerCase()}`}
             >
               <MoreVertIcon />
             </IconButton>
@@ -103,6 +104,7 @@ const LibraryTile = ({ library }) => {
         </CardContent>
         <CardActions disableSpacing>
           <IconButton
+            id={"addNewEntryIn" + library?.name}
             size="large"
             variant=""
             edge="end"

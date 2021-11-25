@@ -20,7 +20,8 @@ const CString = ({ field, mode }) => {
 
   return (
     <TextField
-      id={field.columnUUID}
+      id={field.columnName.replaceAll(" ", "_")}
+      data-testid={field.columnName.replaceAll(" ", "_").toLowerCase()}
       name={field.columnName}
       label={
         <Typography variant="headline" component="h2" color="black">
